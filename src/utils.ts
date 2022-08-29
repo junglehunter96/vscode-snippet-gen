@@ -29,15 +29,11 @@ function replaceAllSR(s: string, p: string, q: string): string {
 
 // 实时生成snippet
 export function generatorCodeSnippet({ name, prefix, body }: Icontent) {
-  console.log("body: ", body);
-  console.log("prefix: ", prefix);
-  console.log("name: ", name);
   let snippet = "";
 
   if (body != "") {
-    console.log("body: ", body);
     let line_arr: Array<string> = body.split("\n");
-    console.log("line_arr: ", line_arr);
+
     if (line_arr.length) {
       line_arr.forEach((line, index) => {
         if (line.indexOf('"') >= 0) {
