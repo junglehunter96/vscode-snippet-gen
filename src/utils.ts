@@ -51,22 +51,48 @@ export function generatorCodeSnippet({ name, prefix, body }: Icontent) {
         snippet += index === line_arr.length - 1 ? "\n" : ",\n";
       });
     }
-
   }
   let result =
-  ',\n"' +
-  name +
-  '": {\n' +
-  '\t"prefix": "' +
-  prefix +
-  '",\n' +
-  '\t"body": [\n' +
-  snippet +
-  // '\t\t""\n'+
-  "\t],\n" +
-  '\t"description": "' +
-  name +
-  '"\n' +
-  "}";
-return result;
+    ',\n"' +
+    name +
+    '": {\n' +
+    '\t"prefix": "' +
+    prefix +
+    '",\n' +
+    '\t"body": [\n' +
+    snippet +
+    // '\t\t""\n'+
+    "\t],\n" +
+    '\t"description": "' +
+    name +
+    '"\n' +
+    "}";
+  return result;
+}
+
+// 在光标处插入字符串
+// myField    文本框对象
+// myValue 要插入的值
+export function insertAtCursor(myField: HTMLTextAreaElement, myValue: string) {
+  //MOZILLA/NETSCAPE support
+  if (myField.selectionStart || myField.selectionStart == 0) {
+    var startPos = myField.selectionStart;
+    var endPos = myField.selectionEnd;
+    // save scrollTop before insert
+    var restoreTop = myField.scrollTop;
+    myField.value =
+      myField.value.substring(0, startPos) +
+      myValue +
+      myField.value.substring(endPos, myField.value.length);
+    if (restoreTop > 0) {
+      // restore previous scrollTop
+      myField.scrollTop = restoreTop;
+    }
+    myField.focus();
+    myField.selectionStart = startPos + myValue.length;
+    myField.selectionEnd = startPos + myValue.length;
+  } else {
+    myField.value += myValue;
+    myField.focus();
+  }
 }
