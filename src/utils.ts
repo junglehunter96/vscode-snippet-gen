@@ -39,9 +39,7 @@ export function generatorCodeSnippet({ name, prefix, body }: Icontent) {
         if (line.indexOf('"') >= 0) {
           line = replaceAllSR(line, '"', '\\"');
         }
-        if (line.indexOf("$") >= 0) {
-          line = line.replace(/[$]/g, "\\\\$");
-        }
+
         line = replaceTab(line);
         snippet += '\t\t"' + line + '"';
         snippet += index === line_arr.length - 1 ? "\n" : ",\n";

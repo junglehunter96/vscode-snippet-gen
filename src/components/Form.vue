@@ -30,13 +30,13 @@ const formData = reactive<Icontent>({
 watch(formData, (updateData: Icontent) => {
 	emitter.emit('change', updateData)
 })
-let number = 0;
+let number = 1;
 nextTick(() => {
 	let element: HTMLTextAreaElement = textarea.value!
 	element.addEventListener('keypress', function (e: KeyboardEvent) {
 
 		if (e.key === 'i') {
-			insertAtCursor(element, '${' + number + ':example}')
+			insertAtCursor(element,`\${${number}:example}`)
 			number++;
 			formData.body = element.value;
 		}

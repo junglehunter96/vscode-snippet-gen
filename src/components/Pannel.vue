@@ -14,13 +14,10 @@ emitter.on("change", (data) => {
 	transData.value = generatorCodeSnippet(data as Icontent)!
 })
 emitter.on("copy", () => {
-
-
+	console.log("copy");
 	if (!transData.value) {
-
 	} else {
 		navigator.clipboard.writeText(transData.value).then(() => {
-
 			console.log("复制成功")
 		})
 	}
